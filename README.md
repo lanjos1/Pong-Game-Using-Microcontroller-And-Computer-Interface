@@ -1,51 +1,51 @@
 # Pong Game Using Microcontroller And Computer Interface
 
-[![Assista ao Vídeo](https://img.shields.io/badge/YouTube-Video_Explicativo-red?logo=youtube)](https://youtu.be/zmxPOv1QS3Y)
-[![Simulação Tinkercad](https://img.shields.io/badge/Tinkercad-Simula%C3%A7%C3%A3o_do_Sistema-blue)](https://www.tinkercad.com/things/4twfonFw2j7)
+[![Watch the Video](https://img.shields.io/badge/YouTube-Project_Video-red?logo=youtube)](https://youtu.be/zmxPOv1QS3Y)
+[![Tinkercad Simulation](https://img.shields.io/badge/Tinkercad-System_Simulation-blue)](https://www.tinkercad.com/things/4twfonFw2j7)
 
-Este projeto consiste na recriação e modernização do clássico jogo **"Pong"** (originalmente criado pela Atari Inc. em 1972) através de uma composição mista de **Hardware** e **Software**. 
+This project consists of recreating and modernizing the classic **"Pong"** game (originally created by Atari Inc. in 1972) through a mixed composition of **Hardware** and **Software**. 
 
-O sistema utiliza uma interface de jogo interativa desenvolvida na linguagem **Processing**, integrada a um ecossistema físico controlado por um microcontrolador **Arduino UNO**, que lê comandos analógicos e digitais de controles personalizados.
+The system features an interactive game interface developed in **Processing**, integrated with a physical ecosystem controlled by an **Arduino UNO** microcontroller, which reads analog and digital commands from custom-built controllers.
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/100162696/177075106-77e521ad-62d0-47f2-a0ed-95a49621b024.PNG" width="600"/>
 </div>
 
-## 🚀 Funcionalidades do Jogo
-* **Tela Inicial Dinâmica:** Menu interativo para iniciar a partida ou acessar configurações.
-* **Menu de Instruções:** Tela dedicada explicando o objetivo do jogo e os comandos dos periféricos.
-* **Sistema de Pause Cooperativo:** O jogo pode ser pausado e retomado/reiniciado através da ação combinada dos botões de ambos os jogadores.
-* **Tela de Fim de Jogo (Vencedor):** Detecção automática de pontuação máxima e declaração em tempo real do jogador vencedor (Lado Esquerdo vs. Lado Direito).
+## 🚀 Game Features
+* **Dynamic Home Screen:** Interactive menu to start the game or access settings.
+* **Instructions Menu:** A dedicated screen explaining the game objectives and controller commands.
+* **Cooperative Pause System:** The game can be paused and resumed/restarted through the combined action of both players' buttons.
+* **Game Over Screen:** Automatic score tracking and real-time winner announcement (Left Side vs. Right Side).
 
-## 🛠️ Especificações Técnicas (Componentes)
+## 🛠️ Technical Specifications (Components)
 
 ### Hardware
-* **1x Microcontrolador:** Arduino UNO R3 (responsável pela coleta de dados dos sensores).
-* **2x Potenciômetros:** Utilizados como *joysticks* analógicos de precisão para movimentar as barras de forma unidimensional.
-* **2x Botões (Push-buttons):** Para comandos de seleção nos menus e acionamento do modo de pause.
-* **3x Resistores de 1KΩ:** Proteção do circuito (utilizado também o recurso interno de resistores de *Pull-Up* do Arduino).
-* **2x Cases Plásticas Customizadas:** Controles ergonômicos do tipo *Paddle Game Controller* modelados e fabricados via **Impressão 3D**.
-* Fios conectores e protoboard para prototipagem.
+* **1x Microcontroller:** Arduino UNO R3 (handles sensor data collection).
+* **2x Potentiometers:** Used as precision analog *joysticks* for one-dimensional paddle movement.
+* **2x Push-buttons:** For navigating menus and triggering the pause mode.
+* **3x 1KΩ Resistors:** Circuit protection (utilizing the Arduino's internal *Pull-Up* resistors as well).
+* **2x Custom Plastic Cases:** Ergonomic *Paddle Game Controllers* modeled and fabricated using **3D Printing**.
+* Jumper wires and breadboard for prototyping.
 
-### Software e Ferramentas
-* **Processing IDE:** Ambiente e linguagem (baseada em C/Java) utilizada no desenvolvimento da lógica do jogo e renderização gráfica orientada a objetos (classes para bola, barras e botões).
-* **Arduino IDE:** Programação do firmware embarcado no microcontrolador.
-* **TinkerCAD:** Plataforma online utilizada para simulação e validação prévia de todo o circuito eletrônico antes da montagem física.
-* **Visual Studio Code & GitHub:** Ferramentas auxiliares de codificação e versionamento.
+### Software & Tools
+* **Processing IDE:** The environment and programming language (based on C/Java) used to develop the game logic and object-oriented graphical rendering (classes for ball, paddles, and buttons).
+* **Arduino IDE:** Used for programming the firmware embedded in the microcontroller.
+* **TinkerCAD:** Online platform utilized for circuit simulation and validation prior to physical assembly.
+* **Visual Studio Code & GitHub:** Auxiliary tools for coding and version control.
 
-## 🔌 Protocolo de Comunicação Serial
-Para transferir os estados dos controles físicos do Arduino para a interface gráfica no computador, foi estruturado um modelo de **Comunicação Serial** simplificado via cabo USB.
+## 🔌 Serial Communication Protocol
+To transfer the status of the physical controllers from the Arduino to the graphical interface on the computer, a simplified **Serial Communication** model was structured via USB.
 
-1.  O Arduino realiza a leitura analógica dos potenciômetros e digital dos botões (utilizando a propriedade `INPUT_PULLUP`).
-2.  Os dados lidos são mapeados (`map()`) para uma escala de `0 a 255`.
-3.  O microcontrolador concatena todos os estados em um único pacote de string estruturado no formato `[v_pot1-v_pot2-v_b01-v_b02\n]`.
-4.  O código em **Processing** recebe essa string continuamente através da biblioteca Serial, realiza o *parsing* (separação dos caracteres delimitados por `-`) e atualiza instantaneamente as posições das barras e as ações de tela no jogo.
+1. The Arduino performs analog readings from the potentiometers and digital readings from the buttons (using the `INPUT_PULLUP` property).
+2. The raw data is mapped (`map()`) to a scale ranging from `0 to 255`.
+3. The microcontroller concatenates all states into a single structured string package formatted as `[v_pot1-v_pot2-v_b01-v_b02\n]`.
+4. The **Processing** application continuously listens to the serial port, parses the incoming string (separating characters delimited by `-`), and instantly updates the paddle positions and game states.
 
-## 🎮 Como Executar o Projeto
+## 🎮 How to Run the Project
 
-1.  **Montagem do Hardware:** Monte o circuito conforme o esquema validado na [Simulação do TinkerCAD](https://www.tinkercad.com/things/4twfonFw2j7).
-2.  **Upload do Firmware:** Abra o código do Arduino presente na pasta de firmware e faça o upload para a sua placa Arduino UNO.
-3.  **Execução do Jogo:** Com o Arduino conectado ao computador via USB, abra o código principal no ambiente do **Processing**, certifique-se de selecionar a porta COM correspondente e clique em *Run*.
+1. **Hardware Setup:** Assemble the circuit according to the schematic verified in the [TinkerCAD Simulation](https://www.tinkercad.com/things/4twfonFw2j7).
+2. **Upload Firmware:** Open the Arduino source code in the firmware directory and upload it to your Arduino UNO board.
+3. **Launch the Game:** Connect the Arduino to your computer via USB, open the main code in the **Processing** environment, select the correct COM port, and click *Run*.
 
 ---
-Desenvolvido como um projeto prático e aplicado de engenharia de computação e eletrônica.
+Developed as a practical and applied computer engineering and electronics project.
